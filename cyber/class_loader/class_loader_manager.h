@@ -63,6 +63,7 @@ std::shared_ptr<Base> ClassLoaderManager::CreateClassObj(
     const std::string& class_name) {
   std::vector<ClassLoader*> class_loaders = GetAllValidClassLoaders();
   for (auto class_loader : class_loaders) {
+    // 一个class loader对应一个动态库
     if (class_loader->IsClassValid<Base>(class_name)) {
       return (class_loader->CreateClassObj<Base>(class_name));
     }

@@ -75,7 +75,7 @@ bool ModuleController::LoadModule(const DagConfig& dag_config) {
   const std::string work_root = common::WorkRoot();
 
   for (auto module_config : dag_config.module_config()) {
-    std::string load_path;
+    std::string load_path; // 动态库地址
     if (module_config.module_library().front() == '/') {
       load_path = module_config.module_library();
     } else {
@@ -88,6 +88,7 @@ bool ModuleController::LoadModule(const DagConfig& dag_config) {
       return false;
     }
 
+    // 加载动态库
     class_loader_manager_.LoadLibrary(load_path);
 
     for (auto& component : module_config.components()) {
